@@ -2,9 +2,8 @@
 {% block content %}
     <article>
         <header><h3>{{ book.title }}</h3></header>
-        <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}">
+        <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}" width="300px" height="450px">
         <p>Author: {{ book.author }}</p>
-        <p>Genre: {{ book.genre }}</p>
         <p>Description: </p>
         <p>{{ book.description }}</p>
         <p>Unit Price:  Php {{ book.unitPrice }}</p>

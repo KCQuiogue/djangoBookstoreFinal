@@ -1,16 +1,5 @@
 {% extends 'base.html' %}
 
-{% block head %}
-    {{ block.super }}
-    <style>
-        .cart-item-image {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-        }
-    </style>
-{% endblock %}
-
 {% block title %}Shopping Cart{% endblock %}
 
 {% block content %}
@@ -20,12 +9,12 @@
             <div class="card mb-3">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}" class="img-fluid cart-item-image">
+                        <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}" class="img-thumbnail" width="100" height="100">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{ item.book.title }}</h5>
-                            <p class="card-text">x Php {{ item.book.price }}</p>
+                            <p class="card-text">x Php {{ item.book.unitPrice }}</p>
                             <form method="post" action="{% url 'update_cart' item.id %}" id="update-form-{{ item.id }}" class="d-inline">
                                 {% csrf_token %}
                                 <button type="button" onclick="updateOrRemoveItem({{ item.id }}, {{ item.quantity }})" class="btn btn-secondary btn-sm">-</button>
