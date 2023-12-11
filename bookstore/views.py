@@ -125,3 +125,40 @@ class BookDelete(generic.DeleteView):
         messages.success(self.request, "Book was deleted successfully.")
         return super(BookDelete, self).form_valid(form)
 # endregion
+
+# Ordering
+
+def create_order(request):
+    if request.method == 'POST':
+        cart_items = CartItem.objects.filter(cart__user=request.user)
+
+        order = Order.objects.create(user=request.user, total_price=0)
+        total_price = 0
+
+        for item in cart_items:
+            OrderItem.objects.create(
+                order=order,
+                book=item.book,
+                quantity=item.quantity,
+                price=item.book.unitPrice
+            )
+            total_price += item.book.unitPrice * item.quantity
+
+        order.total_price = total_price
+        order.save()
+
+        cart_items.delete()
+
+        return redirect('order_confirmation')
+
+    return redirect('cart')
+
+
+@login_required
+def purchase_history(request):
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'bookstore/purchase_history.html', {'orders': orders})
+
+
+def order_confirmation(request):
+    return render(request, 'bookstore/order_confirmation.html')
