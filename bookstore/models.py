@@ -39,6 +39,7 @@ class CartItem(models.Model):
     def __str__(self):
         return f"{self.quantity} of {self.book.title}"
 
+
 # Ordering
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -49,6 +50,7 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order {self.id}"
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
