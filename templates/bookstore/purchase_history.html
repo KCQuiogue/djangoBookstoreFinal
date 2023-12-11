@@ -20,5 +20,7 @@
     {% empty %}
     <p>You have no past orders.</p>
     {% endfor %}
+    <a href="{% url 'view_cart' %}" class="btn btn-primary mb-2">Back to Cart</a>
+    <a href="{% url 'book_list' %}" class="btn btn-primary mb-2">Back to Shopping</a>
 </div>
 {% endblock %}
