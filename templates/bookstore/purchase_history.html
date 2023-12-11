@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Your Purchase History</h2>
+    {% for order in orders %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Order #{{ order.id }}</h5>
+            <p class="card-text"><strong>Date:</strong> {{ order.date_created }}</p>
+            <p class="card-text"><strong>Total Price:</strong> Php {{ order.total_price }}</p>
+            <h6>Items:</h6>
+            <ul>
+                {% for item in order.items.all %}
+                <li>{{ item.quantity }} x {{ item.book.title }} (Php {{ item.price }} each)</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% empty %}
+    <p>You have no past orders.</p>
+    {% endfor %}
+</div>
+{% endblock %}
