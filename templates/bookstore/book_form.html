@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+        <form method="post" novalidate class="card border-primary mb-3 p-2">
+            {% csrf_token %}
+
+            <div class="card-header">
+                {% if book %} Update {% else %} Add {% endif %} Book
+            </div>
+            {% for field in form %}
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                    <small class="text-danger">{{ field.errors|striptags  }}</small>
+                {% endif %}
+            {% endfor %}
+
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a href="{% url 'books' %}" class="btn btn-outline-primary">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h3>Book Index</h3>
+        <a href="{% url 'book-create' %}" class="btn btn-primary">Add Book</a>
+        {% if books %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Unit Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                        <tr class="table-borderless">
+                            <th><a href="{% url 'book' book.id %}">{{ book.title }}</a></th>
+                            <td>{{ book.author }}</td>
+                            <td>{{ book.unitPrice }}</td>
+                            <td><a href="{% url 'book-update' book.id %}">Edit</a></td>
+                            <td><a href="{% url 'book-delete' book.id %}">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h5>No Books.</h5>
+        {% endif %}
+    </div>
+{% endblock content %}
