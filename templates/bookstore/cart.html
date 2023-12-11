@@ -15,6 +15,7 @@
 
 {% block content %}
     <h3>Your Shopping Cart</h3>
+    <a href="{% url 'purchase_history' %}">Purchase History</a>
     <div class="container">
         {% for item in cart_items %}
             <div class="card mb-3">
