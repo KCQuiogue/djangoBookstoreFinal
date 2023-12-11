@@ -29,6 +29,10 @@ urlpatterns = [
     re_path(r'^$', RedirectView.as_view(url='/bookstore/', permanent=True)),
     path('accounts/', include('accounts.urls')),
     path("cart/<int:item_id>/update/", views.update_cart, name="update_cart"),
+
+    path('create_order/', views.create_order, name='create_order'),
+    path('purchase_history/', views.purchase_history, name='purchase_history'),
+    path('order-confirmation/', views.order_confirmation, name='order_confirmation'),
 ]
 
 if settings.DEBUG:
