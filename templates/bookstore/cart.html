@@ -35,6 +35,12 @@
             <p>Cart is Empty</p>
         {% endfor %}
         <p>Total Price: Php {{ total_price }}</p>
+        {% if cart_items %}
+        <form action="{% url 'create_order' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Purchase</button>
+        </form>
+        {% endif %}
     </div>
 
     <a href="{% url 'book_list' %}" class="btn btn-primary">Back to Bookstore</a>
